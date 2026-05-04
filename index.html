@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Poziom 2 - Zaawansowany Wygląd i Gry RPG</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .chapter {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        p, li {
+            font-size: 1.05em;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.95em;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .note {
+            background-color: #e8f4f8;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning {
+            background-color: #fff3e0;
+            border-left: 5px solid #e67e22;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .success {
+            background-color: #e8f8f5;
+            border-left: 5px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .divider {
+            text-align: center;
+            font-size: 2em;
+            color: #bdc3c7;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo-container">
+        <img src="https://i.imgur.com/3MswWf9.png" alt="Logo">
+    </div>
+
+    <h1>System Pro Zbuduj architekturę: ZAAWANSOWANY WYGLĄD I PANELE (EMBEDY)</h1>
+    <p class="subtitle">Czyli jak przestać pisać nudnym tekstem i sprawić, by bot wyglądał profesjonalnie.</p>
+
+    <div class="chapter">
+        <h2>WSTĘP: WCHODZIMY NA WYŻSZY POZIOM</h2>
+        <p>Witaj w Poziomie 2! Niezależnie od tego, czy masz już za sobą absolutne podstawy programowania, czy kupiłeś ten e-book jako swój pierwszy i od razu skaczesz na głęboką wodę – poradzisz sobie bez problemu. Zbudujemy tutaj niezbędne fundamenty, a następnie błyskawicznie przejdziemy do rzeczy, które rzucają się w oczy na każdym profesjonalnym serwerze: <strong>Wiadomości Embed</strong>.</p>
+        <p>Zamiast zwykłego, szarego tekstu, Twój bot nauczy się wysyłać estetyczne ramki z kolorowymi paskami z boku, pogrubionymi tytułami i interaktywnymi przyciskami.</p>
+        <p>Zanim jednak zaczniemy pisać instrukcje dla bota, musimy przygotować nasz warsztat pracy.</p>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 1: NARZĘDZIA PRACY (CO MUSISZ POBRAĆ)</h2>
+        <p>Aby Twój komputer zrozumiał, co do niego piszesz, potrzebujesz dwóch darmowych programów. To absolutne minimum dla każdego programisty.</p>
+        
+        <h3>1. Node.js (Silnik Bota)</h3>
+        <p>To specjalne oprogramowanie, które "ożywia" nasz kod. Bez niego pliki z kodem byłyby tylko bezużytecznym tekstem.</p>
+        <ul>
+            <li>Wejdź na stronę: <strong>nodejs.org</strong>.</li>
+            <li>Pobierz i zainstaluj wersję z napisem <strong>"LTS"</strong> (najbardziej stabilna). Instaluje się ją jak każdą zwykłą grę czy program – po prostu klikaj "Dalej" (Next).</li>
+        </ul>
+
+        <h3>2. Visual Studio Code (Twój Warsztat)</h3>
+        <p>To profesjonalny, darmowy notatnik stworzony specjalnie dla programistów. Pokoloruje on Twój tekst tak, abyś nie zgubił się w linijkach kodu i ułatwi wyłapywanie błędów.</p>
+        <ul>
+            <li>Wejdź na stronę: <strong>code.visualstudio.com</strong>.</li>
+            <li>Pobierz i zainstaluj program.</li>
+        </ul>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 2: REJESTRACJA BOTA (DOWÓD OSOBISTY)</h2>
+        <p>Zanim zaczniemy cokolwiek tworzyć na komputerze, musimy oficjalnie zgłosić Discordowi: "Hej, tworzę nowego bota!".</p>
+        <ol>
+            <li>Wejdź na stronę <strong>Discord Developer Portal</strong> (najlepiej wyszukaj to w Google) i zaloguj się na swoje konto Discord.</li>
+            <li>W prawym górnym rogu kliknij <strong>"New Application"</strong>, nadaj swojemu botowi nazwę i zatwierdź.</li>
+            <li>W menu po lewej stronie przejdź do zakładki <strong>"Bot"</strong>.</li>
+            <li><strong>TOKEN (KLUCZ DO BOTA):</strong> Na tej stronie znajdziesz przycisk <strong>"Reset Token"</strong>. Kliknij go, a pojawi się długi ciąg znaków. To jest tajne hasło Twojego bota. <strong>Skopiuj je i na razie zapisz w bezpiecznym miejscu.</strong> (Uwaga: Nigdy, pod żadnym pozorem nie wysyłaj tego tokenu innym osobom!).</li>
+            <li><strong>INTENTY (BARDZO WAŻNE):</strong> Zjedź na tej samej stronie odrobinę niżej do sekcji <em>"Privileged Gateway Intents"</em>. Zobaczysz tam trzy przełączniki (Presence Intent, Server Members Intent, Message Content Intent). <strong>Włącz wszystkie trzy</strong>, a następnie zapisz zmiany klikając zielony przycisk <strong>"Save Changes"</strong> na dole ekranu.</li>
+        </ol>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 3: TRYB DEWELOPERA W DISCORDZIE</h2>
+        <p>W Poziomie 2 będziemy często odnosić się do konkretnych ról, kanałów czy przycisków. Aby ułatwić sobie pracę, musisz włączyć w swoim Discordzie jedną ukrytą funkcję.</p>
+        <ol>
+            <li>Otwórz zwykłą aplikację Discord.</li>
+            <li>Wejdź w <strong>Ustawienia Użytkownika</strong> (ikona zębatki obok Twojego pseudonimu na dole).</li>
+            <li>Zjedź po lewej stronie do zakładki <strong>Zaawansowane</strong>.</li>
+            <li>Włącz suwak przy opcji <strong>Tryb dewelopera</strong>.</li>
+        </ol>
+        <div class="note">
+            <em>Co to daje? Od teraz, gdy klikniesz na dowolną rolę, kanał lub wiadomość prawym przyciskiem myszy, na samym dole listy pojawi się nowa, magiczna opcja: "Kopiuj ID". Bardzo nam to ułatwi życie w kolejnych rozdziałach!</em>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 4: BAZA PROJEKTU I SŁOWNIK DISCORDA</h2>
+        <p>Mamy już silnik, notatnik i założone konto bota. Czas przygotować folder, w którym to wszystko połączymy.</p>
+        <ol>
+            <li>Stwórz na swoim pulpicie nowy, pusty folder i nazwij go np. <code>moj-bot-v2</code>.</li>
+            <li>Otwórz pobrany wcześniej program <strong>Visual Studio Code</strong>.</li>
+            <li>W lewym górnym rogu kliknij <strong>File</strong> -> <strong>Open Folder</strong> i wybierz folder stworzony na pulpicie.</li>
+            <li>Na górnym pasku kliknij <strong>Terminal</strong> -> <strong>New Terminal</strong>. Na dole ekranu otworzy się czarne okienko (konsola).</li>
+            <li>Wpisz w nim poniższą komendę i wciśnij Enter. Utworzy ona pliki konfiguracyjne dla Twojego bota:<br>
+            <code>npm init -y</code></li>
+            <li>Następnie wpisz drugą komendę i wciśnij Enter. Ta komenda pobierze "słownik języka Discorda", dzięki czemu Twój bot będzie rozumiał polecenia:<br>
+            <code>npm install discord.js</code></li>
+        </ol>
+        <p>Gdy proces się zakończy, w lewym panelu (w Twoim folderze) pojawią się nowe pliki. To znak, że warsztat jest w 100% gotowy do pracy!</p>
+    </div>
+
+    <div class="divider">• • •</div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 5: BUDUJEMY BOTA KLOCEK PO KLOCKU</h2>
+        <p>W lewym panelu Visual Studio Code stwórz nowy, pusty plik i nazwij go <code>index.js</code>. Zamiast wklejać wszystko naraz, zbudujemy naszego bota od samej góry do dołu, linijka po linijce, niczym z klocków LEGO!</p>
+        
+        <p><strong>KROK 1: Narzędzia z pudełka</strong><br>
+        Najpierw musimy wyciągnąć narzędzia. W pierwszej linijce swojego pustego pliku wpisz:</p>
+<pre><code>const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');</code></pre>
+        <p><em>Co tu się dzieje?</em> Polecenie <code>require</code> to takie otwarcie walizki z narzędziami o nazwie "discord.js". Wyciągamy z niej trzy rzeczy: <code>Client</code> (to ciało naszego bota), <code>GatewayIntentBits</code> (pozwolenia) oraz <code>EmbedBuilder</code> – naszą magiczną maszynę do robienia kolorowych ramek!</p>
+
+        <p><strong>KROK 2: Tajne hasło</strong><br>
+        Kliknij Enter dwa razy, zrób przerwę i wklej swoje tajne hasło z Rozdziału 2:</p>
+<pre><code>const TOKEN = 'TUTAJ_WKLEJ_SWOJ_TAJNY_TOKEN';</code></pre>
+        <p><em>Co tu się dzieje?</em> Komputer musi wiedzieć, z jakim kontem na Discordzie ma się połączyć. Słowo <code>const</code> tworzy zamknięte pudełko o nazwie TOKEN, w którym bezpiecznie trzymamy to hasło.</p>
+
+        <p><strong>KROK 3: Oczy i Uszy robota</strong><br>
+        Pod spodem budujemy samego bota. Wklej to:</p>
+<pre><code>const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+});</code></pre>
+
+        <p><strong>KROK 4: Budzik (Przebudzenie bota)</strong><br>
+        Teraz powiemy botowi, co ma zrobić, gdy się obudzi:</p>
+<pre><code>client.on('ready', () => {
+    console.log('Zrobione! Bot jest online!');
+});</code></pre>
+
+        <p><strong>KROK 5: Radar na komendy</strong><br>
+        Zaraz pod spodem dodajemy radar, który bez przerwy kręci się i nasłuchuje wpisywanych komend:</p>
+<pre><code>client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
+});</code></pre>
+
+        <p><strong>KROK 6: Wtyczka do prądu</strong><br>
+        Na samym dole pliku wklejamy ostatni klocek:</p>
+<pre><code>client.login(TOKEN);</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 6: TWORZYMY KOMENDĘ /PANEL (NASZ PIERWSZY EMBED)</h2>
+        <p>Szkielet bota gotowy. Zwykłe wiadomości tekstowe są jednak nudne. My stworzymy <strong>Embed</strong> – czyli specjalną, profesjonalną wizytówkę, która będzie ekranem startowym gry RPG. Będzie miała piękny żółty pasek z boku!</p>
+        
+        <p><strong>KROK 1: Rejestracja komendy (Zgłoszenie do Discorda)</strong><br>
+        Odszukaj w swoim kodzie <strong>KROK 4</strong>, czyli nasz "budzik" (<code>client.on('ready', ...)</code>). Zrób nową linijkę używając klawisza Enter zaraz pod tekstem <code>console.log</code> i wpisz tam rejestrację komendy:</p>
+<pre><code>client.on('ready', () => {
+    console.log('Zrobione! Bot jest online!');
+    
+    // Zgłaszamy nową komendę do systemu Discorda:
+    client.application.commands.create({ 
+        name: 'panel', 
+        description: 'Otwiera panel Gry RPG' 
+    });
+});</code></pre>
+
+        <p><strong>KROK 2: Rysowanie wizytówki (Reakcja na komendę)</strong><br>
+        Skoro Discord już wie o komendzie, nasz bot musi na nią odpisać. Znajdź w swoim kodzie <strong>KROK 5</strong> (nasz radar <code>client.on('interactionCreate'...)</code>). Zrób linijkę wolnego miejsca zaraz pod tekstem <code>return;</code> i wklej kod rysujący wizytówkę:</p>
+<pre><code>client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
+
+    // Tu sprawdzamy, czy ktoś wpisał komendę "/panel"
+    if (interaction.commandName === 'panel') {
+        
+        // 1. Budujemy naszą ramkę z klocków:
+        const ekranRPG = new EmbedBuilder()
+            .setTitle('GRA RPG')
+            .setDescription('wybierz akcje jaką chcesz zrobić')
+            .setColor('#FFFF00');
+
+        // 2. Wysyłamy zbudowaną ramkę na czat!
+        await interaction.reply({ embeds: [ekranRPG] });
+    }
+});</code></pre>
+
+        <div class="note">
+            <strong>JAK TO DZIAŁA? (KLOCEK PO KLOCKU)</strong>
+            <ul>
+                <li><code>new EmbedBuilder()</code> – To nasza pusta kartka. Bot kładzie ją na stół.</li>
+                <li><code>.setTitle('GRA RPG')</code> – Drukuje na samej górze kartki wielki, pogrubiony tytuł.</li>
+                <li><code>.setColor('#FFFF00')</code> – Maluje pionowy pasek z boku kartki. Komputery używają do tego <strong>kodów HEX</strong>. Kod <code>#FFFF00</code> to jaskrawy żółty.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="divider">• • •</div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 7: BAZY DANYCH NASZEJ GRY RPG (SZAFKI Z DANYMI)</h2>
+        <p>Nasza gra RPG staje się coraz bardziej zaawansowana! Gracz będzie miał swoje punkty życia (HP), pancerz, siłę, ekwipunek oraz monety (coiny). Skoro to wszystko ma działać, bot musi mieć miejsce, żeby to zapisywać. Stworzymy mu "szafki" na dane.</p>
+
+        <p><strong>KROK 1: Plik Graczy</strong><br>
+        W swoim folderze głównym stwórz nowy plik i nazwij go <code>gracze.json</code>. Otwórz go i wpisz w nim tylko dwie klamry:</p>
+<pre><code>{}</code></pre>
+
+        <p><strong>KROK 2: Plik Sklepu</strong><br>
+        Stwórz drugi plik o nazwie <code>sklep.json</code>. Wklej do niego ten tekst:</p>
+<pre><code>{
+  "apteczka": { "nazwa": "Apteczka", "cena": 2, "opis": "Leczy do pełnego HP" },
+  "tarcza": { "nazwa": "Tarcza", "cena": 5, "opis": "Daje +50 pancerza na jedną walkę" },
+  "potka": { "nazwa": "Mikstura HP", "cena": 3, "opis": "Daje +50 HP na jedną walkę" },
+  "ul_sila": { "nazwa": "Ulepszenie Siły (+10)", "cena": 5, "opis": "Zwiększa siłę na stałe" },
+  "ul_pancerz": { "nazwa": "Ulepszenie Pancerza (+10)", "cena": 5, "opis": "Zwiększa pancerz na stałe" },
+  "ul_hp": { "nazwa": "Trening Zdrowia (+10 HP)", "cena": 5, "opis": "Zwiększa maksymalne HP na stałe" }
+}</code></pre>
+
+        <p><strong>KROK 3: Narzędzia do czytania i nowe klocki</strong><br>
+        Wejdź do <code>index.js</code> i <strong>podmień całą pierwszą linijkę</strong> na tę poniżej, a pod nią dopisz <code>const fs = require('fs');</code>:</p>
+<pre><code>// 1. IMPORTOWANIE NARZĘDZI
+const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require('discord.js');
+const fs = require('fs');</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 8: ROZWIJANE MENU W PANELU</h2>
+        <p>Odszukaj w swoim kodzie miejsce, gdzie masz wpisane <code>if (interaction.commandName === 'panel')</code> i <strong>zastąp cały ten fragment</strong> (aż do wysłania wiadomości) tym kodem:</p>
+<pre><code>    if (interaction.commandName === 'panel') {
+        
+        // 1. Zółty Embed startowy
+        const ekranRPG = new EmbedBuilder()
+            .setTitle('⚔️ GRA RPG: MENU GŁÓWNE')
+            .setDescription('Witaj w grze! Wybierz akcję z menu poniżej.')
+            .setColor('#FFFF00');
+
+        // 2. Tworzymy listę rozwijaną i wkładamy do "szufladki"
+        const menu = new ActionRowBuilder().addComponents(
+            new StringSelectMenuBuilder()
+                .setCustomId('rpg_menu')
+                .setPlaceholder('Wybierz akcję...')
+                .addOptions(
+                    { label: 'Sprawdź statystyki', description: 'Zobacz swoje HP i Pancerz', value: 'opcja_staty', emoji: '📊' },
+                    { label: 'Znajdź przeciwnika', description: 'Wyrusz do walki', value: 'opcja_walka', emoji: '⚔️' },
+                    { label: 'Ekwipunek', description: 'Twoje przedmioty', value: 'opcja_eq', emoji: '🎒' },
+                    { label: 'Sklep', description: 'Kup ulepszenia i przedmioty', value: 'opcja_sklep', emoji: '🛒' }
+                )
+        );
+
+        // 3. Wysyłamy Embed razem z Menu
+        await interaction.reply({ embeds: [ekranRPG], components: [menu] });
+    }</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 9: ODBIERANIE WYBORU I REJESTRACJA GRACZA</h2>
+        <p>Wysłaliśmy menu, ale bot nadal jest głuchy na kliknięcia. Zrób wolne miejsce pod komendą <code>/panel</code> i dodajmy "odbiornik" kliknięć:</p>
+<pre><code>    // --- OBSŁUGA ROZWIJANEGO MENU ---
+    if (interaction.isStringSelectMenu() && interaction.customId === 'rpg_menu') {
+        
+        // 1. BEZPIECZNE CZYTANIE PLIKU
+        let db;
+        try { 
+            db = JSON.parse(fs.readFileSync('./gracze.json', 'utf-8')); 
+        } catch (e) { 
+            db = {}; 
+        }
+        
+        // 2. SPRAWDZAMY KIM JEST GRACZ
+        let uid = interaction.user.id;
+
+        // 3. JEŚLI NIE MA GO W BAZIE - TWORZYMY MU POSTAĆ
+        if (!db[uid]) {
+            db[uid] = { 
+                hp: 100, max_hp: 100, pancerz: 0, sila: 10, coiny: 0, 
+                ekwipunek: { apteczka: 0, tarcza: 0, potka: 0 },
+                cooldown: 0
+            };
+            fs.writeFileSync('./gracze.json', JSON.stringify(db, null, 2));
+        }
+
+        // 4. CO KLIKNĄŁ GRACZ?
+        const wybor = interaction.values[0]; 
+        
+        if (wybor === 'opcja_staty') {
+            const statyEmbed = new EmbedBuilder()
+                .setTitle(`📊 Statystyki gracza: ${interaction.user.username}`)
+                .addFields(
+                    { name: '❤️ HP', value: `${db[uid].hp} / ${db[uid].max_hp}`, inline: true },
+                    { name: '🛡️ Pancerz', value: `${db[uid].pancerz}`, inline: true },
+                    { name: '⚔️ Siła', value: `${db[uid].sila}`, inline: true },
+                    { name: '🪙 Monety', value: `${db[uid].coiny}`, inline: false }
+                )
+                .setColor('#FFFF00');
+
+            await interaction.reply({ embeds: [statyEmbed], ephemeral: true });
+        }
+    }</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 10: GENERATOR PRZECIWNIKÓW I WALKA</h2>
+        <p>Zaraz pod statystykami dodajemy opcję <code>opcja_walka</code>. Wykorzystamy tu matematykę do wygenerowania wrogów, a ich statystyki ukryjemy w przyciskach!</p>
+<pre><code>        if (wybor === 'opcja_walka') {
+            
+            // 1. ZEGAR (COOLDOWN) - 3 minuty = 180000 milisekund
+            const teraz = Date.now();
+            if (db[uid].cooldown > teraz) {
+                const pozostalo = Math.ceil((db[uid].cooldown - teraz) / 1000 / 60);
+                return interaction.reply({ content: `⏳ Jesteś ranny. Odpocznij jeszcze ${pozostalo} minut(y).`, ephemeral: true });
+            }
+
+            // 2. GENEROWANIE POTWORÓW
+            const mojaSila = db[uid].sila;
+            const wrog1_sila = Math.floor(mojaSila * 0.8); 
+            const wrog2_sila = Math.floor(mojaSila * 1.5); 
+
+            // 3. WIZYTÓWKA Z POTWORAMI
+            const walkaEmbed = new EmbedBuilder()
+                .setTitle('⚔️ ZNALEZIONO PRZECIWNIKÓW')
+                .addFields(
+                    { name: '🟢 Goblin (Słabszy)', value: `⚔️ Siła: ${wrog1_sila}` },
+                    { name: '🔴 Ork (Mocniejszy)', value: `⚔️ Siła: ${wrog2_sila}` }
+                )
+                .setColor('#FFFF00');
+
+            // 4. PRZYCISKI (UKRYTE STATYSTYKI)
+            const rzadWalki = new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`walcz_${wrog1_sila}`)
+                    .setLabel('Walcz z Goblinem')
+                    .setStyle(ButtonStyle.Success),
+                new ButtonBuilder()
+                    .setCustomId(`walcz_${wrog2_sila}`)
+                    .setLabel('Walcz z Orkiem')
+                    .setStyle(ButtonStyle.Danger)
+            );
+
+            await interaction.reply({ embeds: [walkaEmbed], components: [rzadWalki] });
+        }</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 11: REZULTAT WALKI (ZABAWA W KOŚCI)</h2>
+        <p>Wychodzimy na sam dół pliku (całkowicie zamykamy klamrę obsługującą menu) i łapiemy kliknięcie walki.</p>
+<pre><code>    // --- OBSŁUGA PRZYCISKU WALKI ---
+    if (interaction.isButton() && interaction.customId.startsWith('walcz_')) {
+        
+        let db = JSON.parse(fs.readFileSync('./gracze.json', 'utf-8'));
+        let uid = interaction.user.id;
+        let gracz = db[uid];
+
+        // 1. Odczytujemy siłę potwora z ukrytej karteczki przycisku
+        const dane = interaction.customId.split('_');
+        const wrogSila = parseInt(dane[1]);
+        
+        // 2. Matematyczna walka!
+        let mojaCalkowitaSila = gracz.sila + gracz.pancerz + Math.floor(Math.random() * 20);
+        let wrogCalkowitaSila = wrogSila + Math.floor(Math.random() * 20);
+
+        let wygrana = false;
+        if (mojaCalkowitaSila >= wrogCalkowitaSila) {
+            wygrana = true;
+        }
+
+        // 3. Wyniki walki (Kasa i obrażenia)
+        let straconeHP = Math.floor(Math.random() * 20) + 10; 
+        let zdobyteCoiny = 0;
+        let nagrodaText = "";
+
+        if (wygrana === true) {
+            zdobyteCoiny = Math.floor(Math.random() * 4) + 3; 
+            gracz.coiny += zdobyteCoiny;
+            gracz.sila += 1;
+            nagrodaText = `Twoja siła wzrosła o 1! Otrzymałeś ${zdobyteCoiny} coinów.`;
+        } else {
+            zdobyteCoiny = Math.floor(Math.random() * 3) + 1; 
+            gracz.coiny -= zdobyteCoiny;
+            straconeHP += 20; 
+            nagrodaText = `Straciłeś ${zdobyteCoiny} coinów!`;
+        }
+
+        // 4. Zapisywanie zmian i ustawnienie Cooldownu
+        gracz.hp -= straconeHP;
+        if (gracz.hp &lt; 0) gracz.hp = 0;
+        if (gracz.coiny &lt; 0) gracz.coiny = 0;
+
+        gracz.cooldown = Date.now() + 180000; 
+        fs.writeFileSync('./gracze.json', JSON.stringify(db, null, 2));
+
+        // 5. Ekran końcowy
+        const wynikEmbed = new EmbedBuilder()
+            .setTitle('⚔️ REZULTAT WALKI')
+            .addFields(
+                { name: '🟢 OTRZYMANO / NAGRODA', value: nagrodaText },
+                { name: '🔴 UTRACONO / OBRAŻENIA', value: `Straciłeś ${straconeHP} HP.` },
+                { name: '❤️ Twoje obecne HP', value: `${gracz.hp} / ${gracz.max_hp}` }
+            )
+            .setColor('#FFFF00');
+
+        // Nadpisujemy wiadomość wynikiem
+        await interaction.update({ embeds: [wynikEmbed], components: [] });
+    }</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 12: TRIK Z MENU (ŻEBY SIĘ NIE ZACINAŁO)</h2>
+        <p>Pewnie zauważyłeś mały problem. Gdy w panelu wybierzesz opcję, menu blokuje się na tym wyborze. Musimy nauczyć bota prostej sztuczki: <strong>po każdym kliknięciu, bot ma odświeżyć wiadomość</strong>. Wklej to na samym początku obsługi <code>rpg_menu</code>:</p>
+<pre><code>        // --- TRIK: RESETOWANIE MENU ---
+        const czysteMenu = new ActionRowBuilder().addComponents(
+            new StringSelectMenuBuilder()
+                .setCustomId('rpg_menu')
+                .setPlaceholder('Wybierz akcję...')
+                .addOptions(
+                    { label: 'Sprawdź statystyki', description: 'Zobacz swoje HP i Pancerz', value: 'opcja_staty', emoji: '📊' },
+                    { label: 'Znajdź przeciwnika', description: 'Wyrusz do walki', value: 'opcja_walka', emoji: '⚔️' },
+                    { label: 'Ekwipunek', description: 'Twoje przedmioty', value: 'opcja_eq', emoji: '🎒' },
+                    { label: 'Sklep', description: 'Kup ulepszenia i przedmioty', value: 'opcja_sklep', emoji: '🛒' }
+                )
+        );
+        // Bot podmienia zacięte menu w wiadomości na to nowe, czyste!
+        await interaction.message.edit({ components: [czysteMenu] });</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>ROZDZIAŁ 13: DODATKOWE FUNKCJE I KOMENDY</h2>
+        
+        <h3>1. Komenda /usun (Masowe sprzątanie)</h3>
+        <p>Najpierw rejestracja w <code>ready</code>:</p>
+<pre><code>    client.application.commands.create({
+        name: 'usun',
+        description: 'Usuwa wiadomosci z czatu',
+        options: [{ name: 'ilosc', description: 'Ile wiadomosci chcesz usunac?', type: 4, required: true }]
+    });</code></pre>
+        <p>Teraz reakcja w <code>interactionCreate</code>:</p>
+<pre><code>    if (interaction.commandName === 'usun') {
+        const ilosc = interaction.options.getInteger('ilosc'); 
+        await interaction.channel.bulkDelete(ilosc); 
+        await interaction.reply({ content: `🧹 Posprzątano ${ilosc} wiadomości!`, ephemeral: true });
+    }</code></pre>
+
+        <h3>2. Gra w Kości z Botem (/kosc)</h3>
+        <p>Najpierw rejestracja w <code>ready</code>:</p>
+<pre><code>    client.application.commands.create({ name: 'kosc', description: 'Graj w kości z botem!' });</code></pre>
+        <p>Wyświetlanie gry (w <code>isChatInputCommand</code>):</p>
+<pre><code>    if (interaction.commandName === 'kosc') {
+        const koscEmbed = new EmbedBuilder()
+            .setTitle('🎲 Gra w kości')
+            .setDescription('Kliknij zielony przycisk poniżej, aby rzucić kością przeciwko AI!')
+            .setColor('#FFFF00');
+
+        const koscBtn = new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId('losuj_kosc').setLabel('Losuj liczbę!').setStyle(ButtonStyle.Success)
+        );
+
+        await interaction.reply({ embeds: [koscEmbed], components: [koscBtn] });
+    }</code></pre>
+        <p>Wynik rzutu (w obsłudze <code>isButton</code> na dole pliku):</p>
+<pre><code>    if (interaction.isButton() && interaction.customId === 'losuj_kosc') {
+        const graczLos = Math.floor(Math.random() * 6) + 1;
+        const aiLos = Math.floor(Math.random() * 6) + 1;
+        
+        let wynikWalki = "REMIS 🤝";
+        if (graczLos &gt; aiLos) wynikWalki = "WYGRANA 🏆";
+        if (graczLos &lt; aiLos) wynikWalki = "PRZEGRANA 💀";
+
+        const wynikEmbed = new EmbedBuilder()
+            .setTitle('🎲 WYNIKI RZUTU')
+            .setColor('#FFFF00')
+            .addFields(
+                { name: '👤 Twój rzut', value: `${graczLos}`, inline: true },
+                { name: '🤖 Rzut Bota', value: `${aiLos}`, inline: true },
+                { name: 'Rezultat', value: `**${wynikWalki}**`, inline: false }
+            );
+
+        await interaction.update({ embeds: [wynikEmbed], components: [] });
+    }</code></pre>
+
+        <h3>3. System Powitalny (Nowy radar)</h3>
+        <p>Wklej ten kod na samym dole swojego pliku, tuż przed <code>client.login(TOKEN)</code>:</p>
+<pre><code>// --- RADAR POWITAŃ ---
+client.on('guildMemberAdd', async (member) => {
+    
+    // Wklej tutaj skopiowane ID swojego kanału powitań!
+    const kanal_id = 'TUTAJ_ID_KANALU'; 
+    const kanal = member.guild.channels.cache.get(kanal_id);
+
+    if (!kanal) return;
+
+    const witajEmbed = new EmbedBuilder()
+        .setTitle('👋 Mamy nowego gracza!')
+        .setDescription(`Witaj &lt;@${member.id}&gt; na naszym wspaniałym serwerze! Zapoznaj się z regulaminem i zacznij grać używając komendy /panel.`)
+        .setColor('#FFFF00');
+
+    kanal.send({ embeds: [witajEmbed] });
+});</code></pre>
+    </div>
+
+    <div class="divider">• • •</div>
+
+    <div class="chapter">
+        <h2>PUNKT KONTROLNY: FINAŁOWY KOD Z NOWYMI FUNKCJAMI</h2>
+        <div class="success">
+            <strong>Wszystko w jednym miejscu!</strong> Masz teraz gigantycznego bota z grą RPG, ekwipunkiem, sklepem, systemem powitań, kasowaniem wiadomości i grą w kości. Jeśli pilnie śledziłeś poradnik, wpisywałeś kod samodzielnie i Twój bot śmiga bez zarzutu – ogromne gratulacje, odwaliłeś kawał świetnej roboty i nie musisz niczego tu zmieniać!<br><br>
+            Jeśli jednak w trakcie nauki kod przestał działać, pogubiłeś się w układaniu klamerek, wyskakują błędy w terminalu, lub po prostu chcesz mieć gotowy, w pełni funkcjonujący kod łączący wszystkie nasze lekcje – znajdziesz go poniżej. W takim wypadku skopiuj ten kod, zastąp nim całą zawartość swojego pliku <code>index.js</code> i po problemie! (Pamiętaj tylko o podmianie TOKENU i ID Kanału).
+        </div>
+
+<pre><code>const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require('discord.js');
+const fs = require('fs'); 
+
+// 🛑 TUTAJ WKLEJ SWOJ TOKEN
+const TOKEN = 'TUTAJ_WKLEJ_SWOJ_TAJNY_TOKEN';
+
+const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers]
+});
+
+// ==========================================
+// BUDZIK (Rejestracja komend)
+// ==========================================
+client.on('ready', () => {
+    console.log(`Zrobione! Bot działa! Zalogowano jako: ${client.user.tag}`);
+    
+    client.application.commands.create({ name: 'panel', description: 'Otwiera menu Gry RPG' });
+    client.application.commands.create({ name: 'kosc', description: 'Graj w kości z botem!' });
+    client.application.commands.create({
+        name: 'usun',
+        description: 'Usuwa wiadomosci z czatu',
+        options: [{ name: 'ilosc', description: 'Ile usunac?', type: 4, required: true }]
+    });
+});
+
+// ==========================================
+// RADAR GŁÓWNY (Nasłuchiwanie komend i przycisków)
+// ==========================================
+client.on('interactionCreate', async (interaction) => {
+    
+    // --- KOMENDY SLASH ---
+    if (interaction.isChatInputCommand()) {
+        
+        // KOMENDA: /panel
+        if (interaction.commandName === 'panel') {
+            const ekranRPG = new EmbedBuilder()
+                .setTitle('⚔️ GRA RPG: MENU GŁÓWNE')
+                .setDescription('Witaj w grze! Wybierz akcję z menu poniżej.')
+                .setColor('#FFFF00');
+
+            const menu = new ActionRowBuilder().addComponents(
+                new StringSelectMenuBuilder()
+                    .setCustomId('rpg_menu')
+                    .setPlaceholder('Wybierz akcję...')
+                    .addOptions(
+                        { label: 'Sprawdź statystyki', description: 'Zobacz swoje HP i Pancerz', value: 'opcja_staty', emoji: '📊' },
+                        { label: 'Znajdź przeciwnika', description: 'Wyrusz do walki', value: 'opcja_walka', emoji: '⚔️' },
+                        { label: 'Ekwipunek', description: 'Twoje przedmioty', value: 'opcja_eq', emoji: '🎒' },
+                        { label: 'Sklep', description: 'Kup ulepszenia i przedmioty', value: 'opcja_sklep', emoji: '🛒' }
+                    )
+            );
+            await interaction.reply({ embeds: [ekranRPG], components: [menu] });
+        }
+
+        // KOMENDA: /usun
+        if (interaction.commandName === 'usun') {
+            const ilosc = interaction.options.getInteger('ilosc');
+            await interaction.channel.bulkDelete(ilosc);
+            await interaction.reply({ content: `🧹 Posprzątano ${ilosc} wiadomości!`, ephemeral: true });
+        }
+
+        // KOMENDA: /kosc
+        if (interaction.commandName === 'kosc') {
+            const koscEmbed = new EmbedBuilder()
+                .setTitle('🎲 Gra w kości')
+                .setDescription('Kliknij zielony przycisk poniżej, aby rzucić kością przeciwko AI!')
+                .setColor('#FFFF00');
+
+            const koscBtn = new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId('losuj_kosc').setLabel('Losuj liczbę!').setStyle(ButtonStyle.Success)
+            );
+
+            await interaction.reply({ embeds: [koscEmbed], components: [koscBtn] });
+        }
+    }
+
+    // --- MENU ROZWIJANE (PANEL RPG) ---
+    if (interaction.isStringSelectMenu() && interaction.customId === 'rpg_menu') {
+        
+        let db;
+        try { db = JSON.parse(fs.readFileSync('./gracze.json', 'utf-8')); } 
+        catch (e) { db = {}; }
+        let uid = interaction.user.id;
+
+        if (!db[uid]) {
+            db[uid] = { 
+                hp: 100, max_hp: 100, pancerz: 0, sila: 10, coiny: 0, 
+                ekwipunek: { apteczka: 0, tarcza: 0, potka: 0 }, cooldown: 0
+            };
+        }
+
+        const wybor = interaction.values[0];
+
+        // Trik na odświeżenie menu, żeby się nie zacinało!
+        const czysteMenu = new ActionRowBuilder().addComponents(
+            new StringSelectMenuBuilder()
+                .setCustomId('rpg_menu')
+                .setPlaceholder('Wybierz akcję...')
+                .addOptions(
+                    { label: 'Sprawdź statystyki', description: 'Zobacz swoje HP i Pancerz', value: 'opcja_staty', emoji: '📊' },
+                    { label: 'Znajdź przeciwnika', description: 'Wyrusz do walki', value: 'opcja_walka', emoji: '⚔️' },
+                    { label: 'Ekwipunek', description: 'Twoje przedmioty', value: 'opcja_eq', emoji: '🎒' },
+                    { label: 'Sklep', description: 'Kup ulepszenia i przedmioty', value: 'opcja_sklep', emoji: '🛒' }
+                )
+        );
+        await interaction.message.edit({ components: [czysteMenu] });
+
+        // --- STATYSTYKI ---
+        if (wybor === 'opcja_staty') {
+            const statyEmbed = new EmbedBuilder()
+                .setTitle(`📊 Statystyki gracza`)
+                .addFields(
+                    { name: '❤️ HP', value: `${db[uid].hp} / ${db[uid].max_hp}`, inline: true },
+                    { name: '🛡️ Pancerz', value: `${db[uid].pancerz}`, inline: true },
+                    { name: '⚔️ Siła', value: `${db[uid].sila}`, inline: true },
+                    { name: '🪙 Monety', value: `${db[uid].coiny} coinów`, inline: false }
+                )
+                .setColor('#FFFF00');
+            await interaction.reply({ embeds: [statyEmbed], ephemeral: true });
+        }
+
+        // --- EKWIPUNEK ---
+        if (wybor === 'opcja_eq') {
+            const eq = db[uid].ekwipunek;
+            if (eq.apteczka === 0 && eq.tarcza === 0 && eq.potka === 0) {
+                const pusteEq = new EmbedBuilder().setTitle('🎒 Ekwipunek').setDescription('Nic nie masz w ekwipunku.').setColor('#FFFF00');
+                return interaction.reply({ embeds: [pusteEq], ephemeral: true });
+            }
+            const eqEmbed = new EmbedBuilder()
+                .setTitle('🎒 Twój Ekwipunek')
+                .setDescription(`🩹 Apteczki: ${eq.apteczka}\n🛡️ Tarcze: ${eq.tarcza}\n🧪 Potki HP: ${eq.potka}`)
+                .setColor('#FFFF00');
+            await interaction.reply({ embeds: [eqEmbed], ephemeral: true });
+        }
+
+        // --- SKLEP ---
+        if (wybor === 'opcja_sklep') {
+            const asortyment = JSON.parse(fs.readFileSync('./sklep.json', 'utf-8'));
+            const sklepMenu = new StringSelectMenuBuilder().setCustomId('kup_przedmiot').setPlaceholder('Wybierz przedmiot do kupienia...');
+            for (const [id, przedmiot] of Object.entries(asortyment)) {
+                sklepMenu.addOptions({ label: `${przedmiot.nazwa}`, description: `Cena: ${przedmiot.cena} coinów | ${przedmiot.opis}`, value: id });
+            }
+            const sklepEmbed = new EmbedBuilder().setTitle('🛒 SKLEP RPG').setDescription('Wybierz z listy co chcesz kupić!').setColor('#FFFF00');
+            await interaction.reply({ embeds: [sklepEmbed], components: [new ActionRowBuilder().addComponents(sklepMenu)], ephemeral: true });
+        }
+
+        // --- ZNAJDZ PRZECIWNIKA ---
+        if (wybor === 'opcja_walka') {
+            const teraz = Date.now();
+            if (db[uid].cooldown &gt; teraz) {
+                const pozostalo = Math.ceil((db[uid].cooldown - teraz) / 1000 / 60);
+                return interaction.reply({ content: `⏳ Odpocznij. Wróć za ${pozostalo} minut(y).`, ephemeral: true });
+            }
+
+            const wrog1_sila = Math.floor(db[uid].sila * 0.8); 
+            const wrog2_sila = Math.floor(db[uid].sila * 1.5); 
+
+            const walkaEmbed = new EmbedBuilder()
+                .setTitle('⚔️ ZNALEZIONO PRZECIWNIKÓW')
+                .addFields(
+                    { name: '🟢 Goblin (Słabszy)', value: `⚔️ Siła: ${wrog1_sila}` },
+                    { name: '🔴 Ork (Mocniejszy)', value: `⚔️ Siła: ${wrog2_sila}` }
+                )
+                .setColor('#FFFF00');
+
+            const rzadWalki = new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId(`walcz_${wrog1_sila}`).setLabel('Goblin').setStyle(ButtonStyle.Success),
+                new ButtonBuilder().setCustomId(`walcz_${wrog2_sila}`).setLabel('Ork').setStyle(ButtonStyle.Danger)
+            );
+            await interaction.reply({ embeds: [walkaEmbed], components: [rzadWalki] });
+        }
+        fs.writeFileSync('./gracze.json', JSON.stringify(db, null, 2));
+    }
+
+    // --- KUPYWANIE W SKLEPIE ---
+    if (interaction.isStringSelectMenu() && interaction.customId === 'kup_przedmiot') {
+        let db = JSON.parse(fs.readFileSync('./gracze.json', 'utf-8'));
+        let asortyment = JSON.parse(fs.readFileSync('./sklep.json', 'utf-8'));
+        let uid = interaction.user.id;
+        let itemID = interaction.values[0]; 
+        let cena = asortyment[itemID].cena;
+
+        if (db[uid].coiny &lt; cena) return interaction.reply({ content: '❌ Masz za mało coinów!', ephemeral: true });
+
+        db[uid].coiny -= cena; 
+        if (itemID === 'apteczka') { db[uid].hp = db[uid].max_hp; } 
+        if (itemID === 'tarcza') db[uid].ekwipunek.tarcza += 1;
+        if (itemID === 'potka') db[uid].ekwipunek.potka += 1;
+        if (itemID === 'ul_sila') db[uid].sila += 10;
+        if (itemID === 'ul_pancerz') db[uid].pancerz += 10;
+        if (itemID === 'ul_hp') db[uid].max_hp += 10;
+
+        fs.writeFileSync('./gracze.json', JSON.stringify(db, null, 2));
+        await interaction.reply({ content: `✅ Kupiłeś i użyłeś: **${asortyment[itemID].nazwa}**!`, ephemeral: true });
+    }
+
+    // --- LOGIKA WALKI ---
+    if (interaction.isButton() && interaction.customId.startsWith('walcz_')) {
+        let db = JSON.parse(fs.readFileSync('./gracze.json', 'utf-8'));
+        let uid = interaction.user.id;
+        
+        const dane = interaction.customId.split('_');
+        const wrogSila = parseInt(dane[1]);
+        let gracz = db[uid];
+
+        if (gracz.hp &lt;= 0) return interaction.reply({ content: '💀 Masz 0 HP! Kup apteczkę w sklepie.', ephemeral: true });
+
+        let wygrana = (gracz.sila + gracz.pancerz + Math.random()*20) &gt;= (wrogSila + Math.random()*20);
+        let straconeHP = Math.floor(Math.random() * 20) + 10;
+        let zdobyteCoiny = 0;
+        let nagrodaText = "";
+
+        if (wygrana) {
+            zdobyteCoiny = Math.floor(Math.random() * 4) + 3; 
+            gracz.coiny += zdobyteCoiny;
+            gracz.sila += 1;
+            nagrodaText = `Zwiększono siłę o +1! Otrzymałeś ${zdobyteCoiny} coinów.`;
+        } else {
+            zdobyteCoiny = Math.floor(Math.random() * 3) + 1; 
+            gracz.coiny -= zdobyteCoiny;
+            straconeHP += 20; 
+            nagrodaText = `Przegrałeś i upuściłeś ${zdobyteCoiny} coinów!`;
+        }
+
+        gracz.hp -= straconeHP;
+        if (gracz.hp &lt; 0) gracz.hp = 0;
+        if (gracz.coiny &lt; 0) gracz.coiny = 0;
+        gracz.cooldown = Date.now() + 180000; 
+
+        fs.writeFileSync('./gracze.json', JSON.stringify(db, null, 2));
+
+        const wynikEmbed = new EmbedBuilder()
+            .setTitle('⚔️ REZULTAT WALKI')
+            .setDescription(`Wynik: **${wygrana ? 'WYGRANA 🏆' : 'PRZEGRANA 💀'}**`)
+            .addFields(
+                { name: '🟢 NAGRODA', value: nagrodaText },
+                { name: '🔴 UTRACONO', value: `Obrażenia: -${straconeHP} HP.` },
+                { name: '❤️ Obecne HP', value: `${gracz.hp} / ${gracz.max_hp}` }
+            )
+            .setColor('#FFFF00');
+
+        const zakonczBtn = new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId('zakoncz_walke').setLabel('Zakończ Walkę').setStyle(wygrana ? ButtonStyle.Success : ButtonStyle.Danger)
+        );
+
+        await interaction.update({ embeds: [wynikEmbed], components: [zakonczBtn] });
+    }
+
+    // Zamknięcie walki
+    if (interaction.isButton() && interaction.customId === 'zakoncz_walke') {
+        await interaction.update({ content: 'Zakończono. Menu dostępne po wpisaniu /panel.', embeds: [], components: [] });
+    }
+
+    // --- LOGIKA GRY W KOŚCI ---
+    if (interaction.isButton() && interaction.customId === 'losuj_kosc') {
+        const graczLos = Math.floor(Math.random() * 6) + 1;
+        const aiLos = Math.floor(Math.random() * 6) + 1;
+        
+        let wynikWalki = "REMIS 🤝";
+        if (graczLos &gt; aiLos) wynikWalki = "WYGRANA 🏆";
+        if (graczLos &lt; aiLos) wynikWalki = "PRZEGRANA 💀";
+
+        const wynikEmbed = new EmbedBuilder()
+            .setTitle('🎲 WYNIKI RZUTU')
+            .setColor('#FFFF00')
+            .addFields(
+                { name: '👤 Twój rzut', value: `${graczLos}`, inline: true },
+                { name: '🤖 Rzut Bota', value: `${aiLos}`, inline: true },
+                { name: 'Rezultat', value: `**${wynikWalki}**`, inline: false }
+            );
+
+        await interaction.update({ embeds: [wynikEmbed], components: [] });
+    }
+});
+
+// ==========================================
+// RADAR POWITAŃ (Gdy ktoś dołącza do serwera)
+// ==========================================
+client.on('guildMemberAdd', async (member) => {
+    // 🛑 TUTAJ WKLEJ ID SWOJEGO KANAŁU POWITAŃ
+    const kanal_id = 'TUTAJ_ID_KANALU'; 
+    const kanal = member.guild.channels.cache.get(kanal_id);
+
+    if (!kanal) return;
+
+    const witajEmbed = new EmbedBuilder()
+        .setTitle('👋 Mamy nowego gracza!')
+        .setDescription(`Witaj &lt;@${member.id}&gt; na naszym wspaniałym serwerze! Zapoznaj się z regulaminem i zacznij grać używając komendy /panel.`)
+        .setColor('#FFFF00');
+
+    kanal.send({ embeds: [witajEmbed] });
+});
+
+client.login(TOKEN);</code></pre>
+    </div>
+
+    <div class="chapter">
+        <h2>PEŁNY SŁOWNIK POJĘĆ: POZIOM 2</h2>
+        <ul>
+            <li><strong>EmbedBuilder</strong>: Potężne narzędzie z biblioteki Discorda. Służy do budowania bogatych wizytówek (embedów), które mogą posiadać ramki, kolory i wiele zorganizowanych sekcji.</li>
+            <li><strong>.setTitle() / .setDescription() / .setColor()</strong>: Narzędzia do dekorowania Embedu. Ustawiają odpowiednio: pogrubiony tytuł, główny opis oraz kolorowy pionowy pasek po lewej stronie. Kolory podajemy w systemie szesnastkowym (HEX), np. <code>#FFFF00</code> to żółty.</li>
+            <li><strong>.addFields()</strong>: Funkcja, która dodaje w wizytówce piękne, wyrównane kolumny. Użycie <code>inline: true</code> sprawia, że klocki tekstu układają się jeden obok drugiego.</li>
+            <li><strong>ActionRowBuilder</strong>: "Szufladka" na komponenty. Żaden interaktywny przycisk ani rozwijane menu nie może istnieć samodzielnie w wiadomości – musi zostać zapakowane do ActionRow.</li>
+            <li><strong>ButtonBuilder / StringSelectMenuBuilder</strong>: Narzędzia służące do projektowania odpowiednio: klikalnych przycisków oraz list rozwijanych z wieloma opcjami.</li>
+            <li><strong>.setStyle(ButtonStyle...)</strong>: Zmienia kolor i styl przycisku. Najpopularniejsze to <code>Success</code> (Zielony) oraz <code>Danger</code> (Czerwony).</li>
+            <li><strong>interaction.isStringSelectMenu()</strong>: Nasz detektor kliknięć w menu. Radar włącza się tylko wtedy, gdy ktoś wybierze opcję z naszej rozwijanej listy.</li>
+            <li><strong>interaction.isButton()</strong>: Nasz detektor przycisków. Pozwala botowi zareagować dokładnie w momencie, w którym ktoś uderzy w guzik na czacie.</li>
+            <li><strong>interaction.customId</strong>: Niewidzialny, techniczny identyfikator każdego przycisku lub menu. Bot rozpoznaje po nim (jak po ukrytej metce), co dokładnie zostało kliknięte.</li>
+            <li><strong>interaction.values[0]</strong>: Komenda wyciągająca tajny kod (value) wybranej opcji z rozwijanego menu. Pozwala botowi na odczytanie intencji gracza (np. że kliknął konkretnie w "Sklep").</li>
+            <li><strong>interaction.message.edit()</strong>: Komenda pozwalająca botowi na edycję (podmianę) wiadomości na serwerze. Użyliśmy jej do zresetowania naszego panelu, żeby się nie zacinał przy ponownym wybieraniu tej samej opcji.</li>
+            <li><strong>interaction.update()</strong>: Działa podobnie jak edit, ale aktualizuje oryginalną wiadomość DOKŁADNIE w tym samym ułamku sekundy, w którym gracz kliknął w jej przycisk lub menu.</li>
+            <li><strong>fs (File System)</strong>: Narzędzie z zestawu Node.js, które działa jak cyfrowe ręce bota. Pozwala mu fizycznie otwierać, modyfikować i zamykać pliki z danymi graczy i sklepu (nasze pliki .json).</li>
+            <li><strong>Math.random() / Math.floor()</strong>: Maszyna losująca i obcinarka ułamków. Generuje dla nas całkowicie losowe liczby – od obrażeń z walki aż po klasyczne rzuty kostką!</li>
+            <li><strong>.split('_')</strong>: Cyfrowe nożyczki. Pozwalają przeciąć nazwę przycisku (np. <code>walcz_50</code>) na dwa osobne słowa. Użyliśmy ich do przemycenia statystyk potwora wewnątrz samego przycisku!</li>
+            <li><strong>bulkDelete()</strong>: Komenda absolutnego zniszczenia. Służy do masowego, szybkiego kasowania dużej liczby wiadomości z kanału na podstawie komendy <code>/usun</code>.</li>
+            <li><strong>client.on('guildMemberAdd')</strong>: Zupełnie nowy radar! Włącza się w pełni automatycznie tylko w jednym przypadku – gdy na Twój serwer wejdzie nowa osoba.</li>
+            <li><strong>&lt;@${member.id}&gt;</strong>: Specjalny format "pingowania" na Discordzie. Jeśli bot wpisze to w wiadomości, zmieni się to w niebieski znacznik, który wyśle powiadomienie dźwiękowe oznaczanej osobie.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
